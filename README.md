@@ -1,4 +1,4 @@
-# pretox-client
+# Another Pokedex - by Tera
 
 ## Resources:
 GraphQL console: https://beta.pokeapi.co/graphql/console/
