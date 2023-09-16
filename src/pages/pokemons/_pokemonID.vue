@@ -28,9 +28,6 @@ export default {
       return { pokemon: pokemon['data'], error: null }
     }
     catch (error) { return { error: "Pokemon not found", pokemon: null } }
-  },
-  computed: {
-    test() { return 'test'}
   }
 }
 </script>
