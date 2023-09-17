@@ -33,6 +33,8 @@ Main concern were velocity of development and offline mode.
 - Add a counter for the number of pokemons in the current query.
 - Add a PWA icon for mobile devices.
 - Design individual pokemon pages (data already available a fetched through REST at build time).
+- Refactor the getData store function into smaller functions for better readability, maintainability and testability.
+- Add a middleware to redirect to a 404 page if the pokemon is not found.
 
 
 ## Usage:
