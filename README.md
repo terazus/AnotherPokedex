@@ -2,10 +2,10 @@
 
 
 ## Resources:
-Website accessible at https://terapokedex.netlify.app/
-GraphQL console: https://beta.pokeapi.co/graphql/console/
-Nuxt lifecycle hooks: https://v2.nuxt.com/docs/concepts/nuxt-lifecycle/
-Nuxt Workbox: https://pwa.nuxtjs.org/workbox/
+- Website accessible at https://terapokedex.netlify.app/
+- GraphQL console: https://beta.pokeapi.co/graphql/console/
+- Nuxt lifecycle hooks: https://v2.nuxt.com/docs/concepts/nuxt-lifecycle/
+- Nuxt Workbox: https://pwa.nuxtjs.org/workbox/
 
 
 ## Notes:
