@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex"
+import { mapState, mapActions } from "vuex"
 import URLParamHandler from "@/mixins/URLParamHandler"
 
 export default {
@@ -31,12 +31,12 @@ export default {
     typesFilter: {
       get() { return this.typeFilter },
       set(value) {
-        this.setTypesFilter(value)
+        this.applyFilter({ mutationName: 'setTypesFilter', value })
         this.setURLParameters("types", value.join(','))
       }
     },
   },
-  methods: { ...mapMutations('filters', ["setTypesFilter"]) }
+  methods: { ...mapActions('filters', ["applyFilter"]) }
 }
 </script>
 

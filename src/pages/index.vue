@@ -34,7 +34,7 @@
     <v-row
       v-else
       style="height: 100%"
-      align="center"
+      justify="center"
     >
       <v-col
         cols="12"
@@ -44,7 +44,7 @@
           fluid
           class="pa-0"
         >
-          <v-row>
+          <v-row justify="center">
             <v-col
               v-for="(pokemon, index) in getPokemons()"
               :key="'pokemon_' + index"
@@ -87,12 +87,28 @@
           </v-row>
         </v-container>
       </v-col>
+      <v-col
+        v-if="getPokemons().length === limit"
+        cols="12"
+        xl="1"
+        lg="3"
+        md="4"
+        sm="6"
+        xs="6"
+      >
+        <v-btn
+          class="primary"
+          @click="increaseLimit()"
+        >
+          Show more
+        </v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from "vuex"
+import { mapGetters, mapMutations, mapState, mapActions } from "vuex"
 import SearchTypes from "@/components/filters/searchTypes.vue"
 import SearchNames from "@/components/filters/searchNames.vue"
 import SearchColors from "@/components/filters/searchColors.vue"
@@ -103,16 +119,30 @@ export default {
   name: "HomePage",
   components: { SearchAbilities, SearchColors, SearchNames, SearchTypes, PokemonColor },
   data() { return { imageBaseURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' } },
-  computed: { ...mapState('filters', ["error"]) },
-  mounted() {
-    this.setTypesFilter(this.$route.query.types ? this.$route.query.types.split(',') : [])
-    this.setNameFilter(this.$route.query.name ? this.$route.query.name : null)
-    this.setColorFilter(this.$route.query.color ? this.$route.query.color : null)
-    this.setAbilityFilter(this.$route.query.abilities ? this.$route.query.abilities : null)
-  },
+  computed: { ...mapState('filters', ["error", "limit"]) },
+  mounted() { this.applyFilters() },
   methods: {
     ...mapGetters('filters', ["getPokemons"]),
-    ...mapMutations('filters', ["setTypesFilter", "setNameFilter", "setColorFilter", "setAbilityFilter"])
+    ...mapMutations('filters', ["setNameFilter", "setColorFilter", "setAbilityFilter"]),
+    ...mapActions('filters', ["increaseLimit", "applyFilter"]),
+    applyFilters() {
+      this.applyFilter({
+        mutationName: 'setTypesFilter',
+        value: this.$route.query.types ? this.$route.query.types.split(',') : []
+      })
+      this.applyFilter({
+        mutationName: 'setColorFilter',
+        value: this.$route.query.color ? this.$route.query.color : null
+      })
+      this.applyFilter({
+        mutationName: 'setAbilityFilter',
+        value: this.$route.query.abilities ? this.$route.query.abilities : null
+      })
+      this.applyFilter({
+        mutationName: 'setNameFilter',
+        value: this.$route.query.name ? this.$route.query.name : null
+      })
+    }
   }
 }
 </script>

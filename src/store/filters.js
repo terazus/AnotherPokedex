@@ -23,6 +23,7 @@ const URL = "https://beta.pokeapi.co/graphql/v1beta"
 export const state = () => ({
     loading: false,
     error: false,
+    limit: 50,
 
     pokemons: [],
 
@@ -89,12 +90,28 @@ export const actions = {
         catch (e) { commit('setError', e.message) }
         finally { commit('setLoading', false) }
     },
+    increaseLimit({ commit, state }) {
+        if (state.limit < 1000) commit('setLimit', state.limit + 50)
+        else commit('setLimit', 1010)
+    },
+    applyFilter({ commit }, { mutationName, value }) {
+        commit(mutationName, value)
+        commit("setLimit", 50)
+    },
+    resetFilters({ commit }) {
+        commit("setLimit", 50)
+        commit("setTypesFilter", [])
+        commit("setNameFilter", null)
+        commit("setColorFilter", null)
+        commit("setAbilityFilter", null)
+    }
 }
 
 
 export const mutations = {
     setLoading(state, value) { state.loading = value },
     setError(state, value) { state.error = value },
+    setLimit(state, value) { state.limit = value },
 
     setPokemons(state, value) { state.pokemons = value },
 
@@ -119,8 +136,7 @@ export const getters = {
             if (state.nameFilter && !pokemon.name.includes(state.nameFilter)) return false
             if (state.colorFilter && pokemon[COLOR_QUERY_NAME].name !== state.colorFilter) return false
             return !(state.abilityFilter && !pokemon.abilities.includes(state.abilityFilter));
-
-        })
+        }).slice(0, state.limit)
     },
 }
 

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex"
+import { mapState, mapActions } from "vuex"
 import URLParamHandler from "@/mixins/URLParamHandler"
 import PokemonColor from "@/components/pokemonColor.vue"
 
@@ -30,12 +30,12 @@ export default {
     colorsFilter: {
       get() { return this.colorFilter },
       set(value) {
-        this.setColorFilter(value)
+        this.applyFilter({ mutationName: 'setColorFilter', value })
         this.setURLParameters("color", value)
       }
     },
   },
-  methods: { ...mapMutations('filters', ["setColorFilter"]) }
+  methods: { ...mapActions('filters', ["applyFilter"]) }
 }
 </script>
 

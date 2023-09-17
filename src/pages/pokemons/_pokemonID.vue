@@ -8,7 +8,30 @@
       </v-col>
     </v-row>
     <v-row>
-      {{ pokemon }}
+      <v-col cols="12">
+        <v-card>
+          <v-card-title class="primary--text">
+            <h1
+              style="width:100%"
+              class="text-center"
+            >
+              {{ pokemon.name.toUpperCase() }}
+            </h1>
+          </v-card-title>
+          <v-card-text>
+            <v-list
+              v-for="(value, field, index) in pokemon"
+              :key="'field_' + index"
+            >
+              <v-list-item>
+                <v-list-item-content>
+                  {{ field }}: {{ value }}
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card-text>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -23,8 +46,7 @@ export default {
   name: "PokemonID",
   async asyncData({ route }) {
     try {
-      const reference = route.params['pokemonID']
-      let pokemon = await axios.get(BASE_INTEGER_URL + reference)
+      let pokemon = await axios.get(BASE_INTEGER_URL +  route.params['pokemonID'])
       return { pokemon: pokemon['data'], error: null }
     }
     catch (error) { return { error: "Pokemon not found", pokemon: null } }

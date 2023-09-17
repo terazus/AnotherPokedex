@@ -7,16 +7,7 @@
       height="64"
       style="z-index: 10"
     >
-      <nuxt-link
-        to="/"
-        class="white--text"
-      >
-        <v-toolbar-title
-          class="text-body-1 righteous"
-        >
-          {{ title.toUpperCase() }}
-        </v-toolbar-title>
-      </nuxt-link>
+      <NavigationHeader />
     </v-app-bar>
     <v-main>
       <client-only>
@@ -34,16 +25,17 @@
 
 <script>
 import { loadFull } from "tsparticles"
+import NavigationHeader from "@/components/navigation/header.vue"
 
 const particlesInit = async engine => { await loadFull(engine); };
 
 export default {
   name: 'DefaultLayout',
+  components: { NavigationHeader },
   data () {
     return {
       drawer: false,
       fixed: false,
-      title: 'Pokedex',
       particlesInit
     }
   },
