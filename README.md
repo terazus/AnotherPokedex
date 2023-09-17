@@ -9,7 +9,7 @@
 
 
 ## Notes:
-Main concern were velocity of development and offline mode.
+Main considerations were velocity of development and offline mode.
 - SSR/PWA support with graphQL, loading data on `nuxtServerInit`: slower build time, but offline/SEO ready (static pages).
 - Offline mode not set up yet but PWA has the workbox module to let us do that. To make this work properly, we would need to download all images and add them to the distribution.
 - Caching not required because requests are made at build time (inspect browser network tab to confirm).
@@ -32,7 +32,7 @@ Main concern were velocity of development and offline mode.
 - Add JSON-LD markup and sitemap.xml to let google search console parse and reference the pages (https://sitemap.nuxtjs.org/): better SEO.
 - Add a counter for the number of pokemons in the current query.
 - Add a PWA icon for mobile devices.
-- Design individual pokemon pages (data already available a fetched through REST at build time).
+- Design individual pokemon pages (data already available, fetched through REST at build time).
 - Refactor the getData store function into smaller functions for better readability, maintainability and testability.
 - Add a middleware to redirect to a 404 page if the pokemon is not found.
 
